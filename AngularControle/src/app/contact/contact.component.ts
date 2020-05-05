@@ -3,6 +3,7 @@ import { IContacts } from './../../modals/contact';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -29,6 +30,7 @@ export class ContactComponent implements OnInit {
     contact:IContacts;
   
 
+    titlebtn = "Create";
 
       id = 0;
 
@@ -37,23 +39,25 @@ export class ContactComponent implements OnInit {
   
     constructor(private formBuilder: FormBuilder,    private manageContact: ManageContactsService,
       private router: Router) { 
-      this.contactForm = this.formBuilder.group({
-        firstname:  [null,[Validators.required, Validators.minLength(6)]],
-        lastname:   [null,[Validators.required, Validators.minLength(6)]],
-        email:      [null,[Validators.required, Validators.email]],
-        phone:      [null,[Validators.required, Validators.minLength(6)]],
-      });
-  
-      this.firstname  = this.contactForm.controls.firstname;
-      this.lastname   = this.contactForm.controls.lastname;
-      this.email      = this.contactForm.controls.email;
-      this.phone      = this.contactForm.controls.phone;
-
+     
     
     }
 
 
   ngOnInit(): void {
+
+    this.contactForm = this.formBuilder.group({
+      firstname:  [null,[Validators.required, Validators.minLength(6)]],
+      lastname:   [null,[Validators.required, Validators.minLength(6)]],
+      email:      [null,[Validators.required, Validators.email]],
+      phone:      [null,[Validators.required, Validators.minLength(6)]],
+    });
+
+    this.firstname  = this.contactForm.controls.firstname;
+    this.lastname   = this.contactForm.controls.lastname;
+    this.email      = this.contactForm.controls.email;
+    this.phone      = this.contactForm.controls.phone;
+
 
     this.contacts = [];
     this.keys = [];
@@ -68,8 +72,16 @@ export class ContactComponent implements OnInit {
 
   }
 
-  onEdit(contact: IContacts) {
-  
+  onEdit(contact: IContacts):void {
+
+    this.titlebtn = "Update";
+
+    
+    this.contactForm.value.firstname = contact.firstname;
+    this.contactForm.value.lastname = contact.lastname;
+    this.contactForm.value.email = contact.email;
+    this.contactForm.value.phone = contact.phone;
+
     this.contact = contact;
     this.id = contact.id;
   }
@@ -86,7 +98,18 @@ export class ContactComponent implements OnInit {
       phone: this.contactForm.value.phone
     };
   
-    this.manageContact.addContactOnFirebase(this.contact);
+
+    switch (this.titlebtn) {
+      case "Create":
+        this.manageContact.addContactOnFirebase(this.contact);
+
+        break;
+
+      case "Update":
+        this.manageContact.updateContactOnFirebase(this.contact, this.id);
+        break;
+    }
+    
     
   }
 
