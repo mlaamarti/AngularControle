@@ -68,6 +68,16 @@ export class ContactComponent implements OnInit {
 
   }
 
+  onEdit(contact: IContacts) {
+  
+    this.contact = contact;
+    this.id = contact.id;
+  }
+
+  onDelete(id: number) {
+    this.manageContact.deleteContact(id);
+  }
+
   onSubmit(){
     this.contact = {
       firstname: this.contactForm.value.firstname,

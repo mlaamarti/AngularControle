@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import { IContacts } from 'src/modals/contact';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,14 +40,14 @@ export class ManageContactsService {
   }
 
   // add contact to list
-  addContact(contact: IContact): Array<IContact> {
+  addContact(contact: IContacts): Array<IContacts> {
     this.contacts.push(contact);
     return this.contacts;
   }
 
 
   // get all contact firebase
-  getContactsOnFirebase(): Promise<Array<IContact>> {
+  getContactsOnFirebase(): Promise<Array<IContacts>> {
     return new Promise((resolve, reject) => {
       this.database.ref("contacts").on(
         "child_added",
@@ -64,7 +65,7 @@ export class ManageContactsService {
   }
 
   // update Contact firebase
-  updateContactOnFirebase(contact: IContact, id: number) {
+  updateContactOnFirebase(contact: IContacts, id: number) {
     let update = {};
     update["/contacts/" + id] = contact;
 
