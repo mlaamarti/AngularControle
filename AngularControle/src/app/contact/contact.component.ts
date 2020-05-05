@@ -18,6 +18,9 @@ export class ContactComponent implements OnInit {
     // list Contact
     contacts: Array<IContacts>;
 
+    // style btn
+    styleBtn = "btn-primary";
+
   
 
     // AbstractControl class for FormControl, FormGroup
@@ -75,6 +78,7 @@ export class ContactComponent implements OnInit {
   onEdit(contact: IContacts):void {
 
     this.titlebtn = "Update";
+    this.styleBtn = "btn-danger";
 
     
     this.contactForm.value.firstname = contact.firstname;
