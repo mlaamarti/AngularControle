@@ -76,7 +76,7 @@ export class ContactComponent implements OnInit {
 
   onDelete(id: number) {
     this.manageContact.deleteContact(id);
-  }
+  } 
 
   onSubmit(){
     this.contact = {
