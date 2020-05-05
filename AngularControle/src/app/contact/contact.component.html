@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row py-5 mt-4 align-items-center">
-        <form>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
           <!-- Registeration Form -->
           <div class="col-md-12 col-lg-12 ml-auto">
                 <div class="row">
@@ -25,7 +25,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input type="text" placeholder="First Name" class="form-control bg-white border-left-0 border-md">
+                        <input type="text" [formControl]="firstname"  placeholder="First Name" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Last Name -->
@@ -35,7 +35,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input  type="text" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
+                        <input  [formControl]="lastname"  type="text" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Email Address -->
@@ -45,7 +45,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input   type="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input   [formControl]="email"  type="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Phone Number -->
@@ -55,12 +55,12 @@
                                 <i class="fa fa-phone-square text-muted"></i>
                             </span>
                         </div>
-                        <input  type="tel"  placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
+                        <input  [formControl]="phone"  type="tel"  placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
                     </div>.
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <button  type="submit" class="btn btn-block py-2 font-weight-bold"></button>
+                        <button  type="submit" class="btn btn-primary btn-block py-2 font-weight-bold" >Ajouter</button>
                     </div>
 
                 </div>
